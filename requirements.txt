@@ -1,0 +1,5 @@
+dbt-core
+dbt-redshift
+mage-ai[redshift]
+botocore
+boto3
