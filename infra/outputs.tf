@@ -11,16 +11,16 @@ output "s3_bucket_endpoint" {
 }
 
 # Redshift (data warehouse) admin name
-output "redshift_admin" {
+output "redshift_admin_username" {
   description = "Redshift (data warehouse) admin username."
   value = aws_redshift_cluster.default.master_username
 }
 
 # Redshift (data warehouse) admin password
-output "redshift_admin_pass" {
-  sensitive   = true
+output "redshift_admin_password" {
   description = "Redshift (data warehouse) admin password."
   value = aws_redshift_cluster.default.master_password
+  sensitive = true
 }
 
 # Redshift (data warehouse) database
