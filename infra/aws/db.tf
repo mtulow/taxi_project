@@ -1,5 +1,6 @@
 # db.tf | Database Configuration
 
+# RDS Instance: PostgreSQL
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name        = "${var.app_name}-${var.app_environment}-rds-subnet-group"
   description = "${var.app_name} RDS subnet group"
@@ -9,7 +10,6 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
     Environment = var.app_environment
   }
 }
-
 
 resource "aws_security_group" "rds_sg" {
   name = "${var.app_name}-${var.app_environment}-rds-sg"

@@ -1,3 +1,4 @@
+# AWS Credentials
 variable "AWS_ACCESS_KEY_ID" {
   type      = string
   sensitive = true
@@ -8,11 +9,6 @@ variable "AWS_SECRET_ACCESS_KEY" {
   type      = string
   sensitive = true
   default   = "AWS_SECRET_ACCESS_KEY"
-}
-
-variable "DATABASE_CONNECTION_URL" {
-  type    = string
-  default = ""
 }
 
 variable "app_count" {
@@ -44,9 +40,15 @@ variable "app_environment" {
   default     = "dev"
 }
 
-variable "cidr" {
-  description = "The CIDR block for the VPC."
-  default     = "10.32.0.0/16"
+
+# ================= #
+# Storage Variables #
+# ================= #
+
+# RDS Instance: PostgreSQL
+variable "DATABASE_CONNECTION_URL" {
+  type    = string
+  default = ""
 }
 
 variable "database_name" {
@@ -73,6 +75,54 @@ variable "database_port" {
   default     = 5432
 }
 
+# Data Lake: S3 Bucket
+variable "dl_prefix" {
+  type = string
+  description = "The prefix of the S3 bucket."
+  default = "nyc-tlc-"
+}
+
+# Redshift Cluster
+variable "dw_prefix" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  default     = "nyc-tlc"
+}
+
+variable "dw_name" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  default     = "nyc-tlc"
+}
+
+variable "dw_admin_username" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  default     = "dwusername"
+}
+
+variable "dw_master_password" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  sensitive   = true
+}
+
+variable "dw_node_type" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  default     = "dc2.large"
+}
+
+variable "dw_cluster_type" {
+  type        = string
+  description = "The prefix of the Redshift cluster."
+  default     = "single-node"
+}
+
+# ================= # 
+# Compute Variables #
+# ================= #
+
 variable "docker_image" {
   description = "Docker image url used in ECS task."
   default     = "mageai/mageai:latest"
@@ -86,6 +136,15 @@ variable "ecs_task_cpu" {
 variable "ecs_task_memory" {
   description = "ECS task memory"
   default     = 1024
+}
+
+# ================= #
+# Network Variables #
+# ================= #
+
+variable "cidr" {
+  description = "The CIDR block for the VPC."
+  default     = "10.32.0.0/16"
 }
 
 variable "public_subnets" {

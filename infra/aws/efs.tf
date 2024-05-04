@@ -18,7 +18,6 @@ resource "aws_efs_mount_target" "mount_target" {
   security_groups = [ aws_security_group.mount_target_security_group.id ]
 }
 
-
 resource "aws_security_group" "mount_target_security_group" {
   vpc_id = aws_vpc.aws-vpc.id
 

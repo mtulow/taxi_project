@@ -67,6 +67,61 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
 EOF
 }
 
+# IAM Redshift Role
+data "aws_iam_policy_document" "s3_access" {
+  statement {
+    sid = "1"
+    actions = [
+      ""
+    ]
+  }
+}
+resource "aws_iam_role" "redshift_role" {
+  name = "redshift_role"
+  assume_role_policy = aws_iam_policy_document.s3_access
+}
+resource "aws_iam_role" "redshift_role" {
+
+ name = "redshift_role"
+
+assume_role_policy = <<EOF
+
+{
+
+ "Version": "2012-10-17",
+
+ "Statement": [
+
+   {
+
+     "Action": "sts:AssumeRole",
+
+     "Principal": {
+
+       "Service": "redshift.amazonaws.com"
+
+     },
+
+     "Effect": "Allow",
+
+     "Sid": ""
+
+   }
+
+ ]
+
+}
+
+EOF
+
+tags = {
+
+   tag-key = "redshift-role"
+
+ }
+
+}
+
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_lambda_role" {
  role        = aws_iam_role.lambda_role.name
  policy_arn  = aws_iam_policy.iam_policy_for_lambda.arn
